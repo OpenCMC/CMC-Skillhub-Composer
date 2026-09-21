@@ -16,6 +16,8 @@ This skill uses two tools from the connected CMC Crypto Skill Hub MCP server: `f
 
 Do not assume a fixed server id. Across clients and environments the same service is registered under different ids — for example `cmc-skill-hub`, `crypto-skill-hub`, or a `*-beta` id — and its tools may surface under different names, such as `mcp__cmc-skill-hub__find_skill` in Claude Code or `cmc-skill-hub:find_skill` elsewhere. Call the tools by whatever name the connected server actually exposes for `find_skill` and `execute_skill`.
 
+Default market-data access uses only the connected Hub's `find_skill` and `execute_skill`. Standalone data tools exposed alongside them are separate providers even when they share a CMC label or MCP namespace. Without an explicit user request for an external source, do not call those tools to bypass a missing Hub capability.
+
 Prefer production over `*-beta` unless the user specifies otherwise. Keep discovery and execution on the same verified Hub. Whether a service is backed by FastAPI or SQL, use its discovered contract through `find_skill` and `execute_skill`; do not invent backend endpoints, tables or queries.
 
 ## When not to use
