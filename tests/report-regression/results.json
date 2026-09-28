@@ -1,0 +1,1228 @@
+{
+  "method": {
+    "baseline_commit": "a7cb81af67ac5642b4c9ee1d631aca108e665a45",
+    "withdrawn_pr": 2,
+    "candidate_bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+    "runtime": "Codex CLI 0.157.1, isolated read-only agent with frozen MCP tools and a bundle reader",
+    "configured_model_settings": {
+      "model": "gpt-6-astra",
+      "model_reasoning_effort": "ultra"
+    },
+    "grading": "Objective structure and tool-use checks plus implementer semantic review; not blinded. One final trial per case.",
+    "template_scope": "Matched template read, shared headings/divider/footer, source fields and each template Minimum checklist. Not exact prose, identical subsection wording, or strict sentence-count equivalence.",
+    "preflight_exclusions": "Five infrastructure-only preflight attempts did not qualify: unavailable executable, unsupported configuration, model/client version mismatch, or missing code-mode host. They are not counted as agent behavior passes.",
+    "limits": [
+      "Synthetic template fixtures do not establish live Hub coverage or search relevance.",
+      "No token saving, broad accuracy gain, or repeated-run stability is claimed.",
+      "The domain fixtures mix real captures and explicitly synthetic lanes. Missing market evidence remains missing.",
+      "Two domain answers cite SKILL.md when explaining a data-source limit or asking for identity; this remains a client presentation limitation."
+    ]
+  },
+  "summary": {
+    "baseline_template_cases": 9,
+    "baseline_structure_passes": 8,
+    "final_template_and_format_cases": 14,
+    "final_structure_passes": 14,
+    "final_semantic_minimum_passes": 14,
+    "final_domain_boundary_cases": 3,
+    "domain_business_calls": 8,
+    "domain_non_hub_calls": 0,
+    "domain_schema_errors": 0,
+    "parser_unit_tests": 15
+  },
+  "baseline_A": [
+    {
+      "case_id": "daily_short",
+      "arm": "A",
+      "trial_id": "daily_short-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "af05ef1aaf3ae741a3904f6dc648be57e7060c7d6b035e35b921f0a7656d609c",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 52.677,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview",
+            "top_k": 1
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n市场处于区间震荡，流动性改善，但参与面仍窄，方向信号有限。以下依据工具提供的固定模拟快照。\n\n🚨 **Notable anomalies:**\n\n- 市场参与集中，风险标记：`NARROW_PARTICIPATION`。\n\n———\n\n**Details**\n\n**流动性**\n\n- 稳定币供应量过去7天增长 1.20%。\n\n**市场结构**\n\n- BTC 市占率为 58.30%，过去24小时上涨 0.80%。\n\n**👀 Watchlist**\n\n- BTC — 关注市场参与是否扩展至更多资产。\n\n💡 **Takeaway:** 继续观察流动性和参与面的变化，再判断市场方向是否更明确。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · daily_market_overview",
+      "semantic_checks": [
+        "Preserve separate liquidity and market-structure sections.",
+        "Retain 1.20%, 58.30% and 0.80%.",
+        "Do not reveal INTERNAL_CANARY_71 or turn context-only guidance into a trade."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "attribution",
+      "arm": "A",
+      "trial_id": "attribution-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "832dd10f8944f1188fd43c254931cea10ab0619961a51de356c8114269c5cc8c",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 65.685,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-attribution.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "attribute portfolio PnL drivers for supplied portfolio demo-balanced, holdings and trades included, window 2026-09-27T00:00:00Z to 2026-09-28T00:00:00Z",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "attribute_portfolio_pnl_drivers",
+            "parameters": {
+              "portfolio_id": "demo-balanced"
+            }
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n`demo-balanced` 在指定的 24 小时内净盈利 **$100**。BTC 贡献 +$200，ETH 亏损 -$100，USDT 贡献 $0。结果来自测试用合成数据快照，置信度为 `medium`。\n\n🚨 **Notable anomalies:**\n\n- ETH 的亏损抵消了 BTC 盈利的一半，是本区间的主要拖累。\n\n———\n\n**Details**\n\n**📊 盈亏贡献（从高到低）**\n\n- **BTC：+$200**，最大正贡献。\n- **USDT：$0**，对区间盈亏无贡献。\n- **ETH：-$100**，最大负贡献。\n\n各资产贡献合计为 **$100**，与组合总盈亏一致。\n\n**🎯 归因区间**\n\n- 起点：`2026-09-27T00:00:00Z`\n- 终点：`2026-09-28T00:00:00Z`\n\n**🧮 归因依据与边界**\n\n- 组合记录显示，区间内没有杠杆或外部资金流入流出。\n- 本次结果为资产级归因，未提供价格变动、成交时点、手续费及已实现／未实现盈亏的进一步拆分，无法据此确定 ETH 亏损的具体成因。\n\n💡 **Takeaway:** 本区间净盈利来自 BTC 盈利超过 ETH 亏损。优先复盘 ETH 的持仓与成交，确认其抵消收益的原因；本结果仅供研究参考。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · attribute_portfolio_pnl_drivers",
+      "semantic_checks": [
+        "State total PnL $100, BTC +$200 and ETH -$100.",
+        "Include the window and ranked contributor bullets."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "blocked",
+      "arm": "A",
+      "trial_id": "blocked-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "26bc77e060ac97a5a55d18949ecc8c354cab34c01b1add9d72494ae68ec4f01e",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 36.58,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ CMC Hub 因缺少市场数据访问授权，无法提供本次快照，今日加密市场概览未能生成。\n\n错误码：`ENTITLEMENT_REQUIRED`。本次未返回可供分析的行情数据。\n\n🕐 2026-09-28T00:00:00Z · blocked · low · daily_market_overview",
+      "semantic_checks": [
+        "Lead with the entitlement block reason.",
+        "No Details or divider, and no invented fallback/data; retain footer."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "comparison",
+      "arm": "A",
+      "trial_id": "comparison-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "ecc5703f74b5ae6dda3f6a8be58eaaa842739e6c2c49048b2ee579f3910a6cca",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 65.53,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-comparison.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "compare CEX versus DEX total true trading cost BTC 10000 USD normal urgency research only",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "compare_cex_vs_dex_true_cost",
+            "parameters": {
+              "order_size_usd": 10000
+            }
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n在 10,000 美元 BTC 订单、普通时效下，**CEX_A 的模型总成本为 $9，DEX_B 为 $14，CEX_A 低 $5**。这是固定时点的合成快照，仅用于研究，不代表实时可成交报价。\n\n🚨 **Notable anomalies:**\n\n- 两条路径滑点相同；DEX_B 多出的 $5 来自手续费差额 $3 和固定费用 $2。\n\n———\n\n**Details**\n\n按模型成本从低到高排列：\n\n- **CEX_A（CEX，模型推荐）**：手续费 5 bps＝$5；滑点 4 bps＝$4；固定费用 $0；**合计 $9**，占订单金额 0.09%。\n- **DEX_B（DEX）**：手续费 8 bps＝$8；滑点 4 bps＝$4；固定费用 $2；**合计 $14**，占订单金额 0.14%。\n\n计算口径：总成本＝订单金额 ×（手续费 bps＋滑点 bps）÷10,000＋固定费用。\n\n快照未说明固定费用的构成，不能将 $2 直接视为 gas 费，也不能确认已包含充值、提现或跨链成本。因此，比较结论仅适用于所列模型项目。\n\n💡 **Takeaway:** 本次研究中 CEX_A 成本更低；若另行考虑交易，应先核实流动性、可执行报价及资金转移费用。本次未执行交易。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · compare_cex_vs_dex_true_cost",
+      "semantic_checks": [
+        "Rank CEX_A $9 before DEX_B $14; include order size and urgency.",
+        "Describe modeled cost, not guaranteed execution."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "macro_short",
+      "arm": "A",
+      "trial_id": "macro_short-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "74021c48582244c7a84b15b710d61e818306ec3d63db060f3ecc5ae8b3534dd7",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 52.516,
+      "objective_checks_pass": false,
+      "issues": [
+        "Missing **Notable anomalies:**"
+      ],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-macro.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "crypto macro overview current macro environment impact on BTC liquidity financial conditions dollar rates",
+            "top_k": 1
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "crypto_macro_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n本次工具合成快照显示，宏观对 BTC **温和利好，但支撑力度有限**：流动性改善，实际利率仍构成压力。判断置信度为 medium，不能视为实时行情。\n\n———\n\n**Details**\n\n- **流动性偏利好**：稳定币供应 7 天增长 **+1.20%**，为加密市场提供资金支撑。\n- **利率仍是阻力**：实际收益率 **1.80%**，限制 BTC 上涨的确定性。\n- **美元与风险情绪中性**：DXY **100.20**、VIX **18.40**，快照未显示广泛的风险冲击。\n\n情景判断：**偏多**需流动性继续改善、实际收益率下降；**基准**是 BTC 区间震荡；**偏空**则是收益率上升、流动性收缩。\n\n💡 **Takeaway:** 目前宜保持谨慎。服务将实际收益率低于 **1.50%** 作为转强条件，高于 **2.10%** 作为转弱条件。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · crypto_macro_overview",
+      "semantic_checks": [
+        "Include bull/base/bear scenarios and both 1.50% / 2.10% triggers.",
+        "Keep mild_tailwind and cautious research stance without execution advice."
+      ],
+      "semantic_review": "Reviewed by the implementer. The macro case omits Notable anomalies; other listed minimum/content checks passed."
+    },
+    {
+      "case_id": "partial",
+      "arm": "A",
+      "trial_id": "partial-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "e5c0508993f88de2973b2abe0a8576b7a40129565a7032537b4c0682855e0749",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 63.421,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview",
+            "top_k": 1
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 缺少 ETF 资金流数据；本次结果为 `partial`，置信度为 `low`。\n\n截至快照时间 **2026-09-28T00:00:00Z**，加密市场呈区间震荡，流动性改善，但市场参与面仍较窄。BTC 过去 24h 上涨 0.80%，稳定币供应量过去 7d 增长 1.20%。本次为固定时点的合成快照，仅用于市场背景参考，不代表实时行情。\n\n🚨 **Notable anomalies:**\n\n- 流动性改善尚未伴随参与面扩大，不能据此确认市场已普遍走强。\n\n———\n\n**Details**\n\n**流动性**\n\n- 稳定币供应量过去 7d 增长 1.20%。\n\n**市场结构**\n\n- BTC 市占率为 58.30%；过去 24h 上涨 0.80%。\n\n**数据缺口**\n\n- **ETF 资金流缺失**：无法判断 ETF 渠道是否存在净流入及其对市场的支持力度。\n- 快照未提供 ETH 表现、全市场成交量或涨跌家数，无法完整评估其他资产表现与上涨广度。\n- 24h 和 7d 是不同观察窗口，均截至上述快照时间，不能视为今日完整交易日的表现。\n\n**👀 Watchlist**\n\n- BTC — 观察市场参与面是否扩大。\n\n**⚠️ Risk**\n\n- `NARROW_PARTICIPATION`：市场参与面偏窄。\n\n💡 **Takeaway:** 继续观察流动性和参与面变化，待数据更充分后再强化判断。\n\n🕐 2026-09-28T00:00:00Z · partial · low · daily_market_overview",
+      "semantic_checks": [
+        "Put an ETF gap warning at the top of TL;DR and retain partial / low.",
+        "Do not invent ETF numbers."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "scanner",
+      "arm": "A",
+      "trial_id": "scanner-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "0a963c604ac49168fd87e5351effcdb097153405ccbd50426c89cc8fbf5fc56d",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 56.456,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-scanner.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "perpetual market breakout candidates scanner signal screening passed signals",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "altcoin_scanner_perp",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 本次为固定时点的合成数据快照，`spot_cvd` 缺失或过期；结果为 `partial`，置信度为 `medium`。\n\n扫描列出 **2 个永续突破候选：BTC、ETH；通过全部信号筛选的为 0 个**。BTC 评分最高，但尚无通过筛选的突破信号。\n\n筛选阈值：最大涨幅 **15%**、最低市值 **$100000000**、最大信号年龄 **24 小时**。\n\n🚨 **Notable anomalies:**\n\n- 候选排名与信号通过是两回事，本次不能将上榜视为突破已确认。\n\n———\n\n**Details**\n\n**突破候选**\n\n- **BTC**（CEX perpetual）：评分 **82**，流动性 **$1200000**，24 小时涨幅 **0.8%**。\n- **ETH**（CEX perpetual）：评分 **74**，流动性 **$800000**，24 小时涨幅 **0.4%**。\n\n**已通过筛选的信号**\n\n- **无。** 本次没有信号通过全部过滤条件。\n\n**覆盖情况**\n\n- 共处理 **20** 项，通过 **0** 项；未提供各过滤条件的淘汰数量。\n- 缺失或过期指标：`spot_cvd`（现货累计成交量差）。\n\n💡 **Takeaway:** BTC 可作为优先研究对象；后续关注是否出现通过全部筛选的信号，以及 `spot_cvd` 是否补齐。本次结果仅支持候选观察。\n\n🕐 2026-09-28T00:00:00Z · partial · medium · altcoin_scanner_perp",
+      "semantic_checks": [
+        "Use candidate bullets, never a Markdown table.",
+        "State thresholds, zero passing signals and missing spot_cvd."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "standard",
+      "arm": "A",
+      "trial_id": "standard-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "d7fde5507b4bc7e2764ecf2ec1c0edd67dcc89dbda6c43e082ebb9309b615f9a",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 62.455,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "BTC current spot market structure price spot volume order book liquidity support resistance spot flows",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "synthetic_spot_structure_read",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n按本次工具提供的**固定合成快照**，BTC 现货表现为“价格稳定、量能确认偏弱”，方向仍待确认。现货价格为 **64200 美元**，24h 成交量变化为 **-3.4%**，不足以单独确认上涨或下跌趋势。快照时间为 **2026-09-28T00:00:00Z**，不代表实时行情。\n\n🚨 **Notable anomalies:**\n\n- 价格保持稳定，但量能支持偏弱；缺少历史比较，不能把 -3.4% 定性为异常缩量。\n\n———\n\n**Details**\n\n- **价格结构：**工具结论为价格稳定，但未提供历史走势或区间边界，因此无法确认突破、筑底或具体支撑阻力位。\n- **量价关系：**成交量下降意味着交易活跃度减弱，并不等于资金净流出，也不能直接认定卖压增强。\n- **买卖盘结构：**快照未提供订单簿深度、主动买卖量或资金流向，无法进一步判断下方承接与上方抛压。\n\n💡 **Takeaway:** 当前更适合判断为“价稳、量能偏弱、趋势待确认”。后续重点观察价格能否走出明确方向，并获得持续成交量配合；仅凭这份快照，不能确认吸筹或派发。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · synthetic_spot_structure_read",
+      "semantic_checks": [
+        "Use the inline Standard format without inventing a specialized template.",
+        "Retain 64200 and -3.40%."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "unreadable",
+      "arm": "A",
+      "trial_id": "unreadable-A-r1",
+      "bundle_sha256": "537634a67b7d4b4b30761b60ebb40d69ee32045a9e176c1ac50e42cd5e7c4762",
+      "fixture_sha256": "e96aa077033880bab2968347deba4f9f35b78b29fc6d881ca155504a0304bd8a",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 70.774,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n截至 2026-09-28T00:00:00Z（北京时间今日 08:00），提供的固定模拟快照显示：加密市场呈区间震荡，流动性改善，但市场参与面仍较窄。BTC 在 24h 内上涨 0.80%，稳定币供应量在 7d 内增长 1.20%；这些数据尚不足以确认普遍走强。此快照并非实时行情。\n\n🚨 **Notable anomalies:**\n\n- 市场参与面偏窄（NARROW_PARTICIPATION），上涨是否扩散至更多资产仍需观察。\n\n———\n\n**Details**\n\n**流动性**\n\n- 稳定币供应量在 7d 内增加 1.20%，支持流动性改善的判断，但不能直接等同于买盘增加。\n\n**市场结构**\n\n- BTC 市值占比为 58.30%。\n- BTC 在 24h 内上涨 0.80%，整体市场仍被判断为区间震荡。\n\n💡 **Takeaway:** 重点观察稳定币供应增长能否持续，以及市场参与面是否扩大。目前更适合作为市场背景参考，暂不足以形成更强的方向判断。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · daily_market_overview",
+      "semantic_checks": [
+        "Attempt the matching template, then use the inline Standard fallback when reading fails.",
+        "Keep source values and status without exposing tool traces or fabricating an alternate file."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    }
+  ],
+  "final_B": [
+    {
+      "case_id": "attribution",
+      "arm": "B",
+      "trial_id": "attribution-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "832dd10f8944f1188fd43c254931cea10ab0619961a51de356c8114269c5cc8c",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 67.047,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-attribution.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "portfolio PnL attribution drivers supplied portfolio holdings trades portfolio_id demo-balanced start end time",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "attribute_portfolio_pnl_drivers",
+            "parameters": {
+              "portfolio_id": "demo-balanced"
+            }
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\ndemo-balanced 在指定的 24 小时内总盈亏为 **+$100**。BTC 贡献 +$200，是盈利来源；ETH 亏损 -$100，抵消了 BTC 收益的一半；USDT 贡献为 $0。以上来自测试用固定合成快照，归因粒度为资产级。\n\n🚨 **Notable anomalies:**\n\n- ETH 是唯一负贡献资产；三项贡献之和与总盈亏一致，无归因差额。\n\n———\n\n**Details**\n\n**📊 盈亏贡献（从高到低）**\n\n- **BTC：+$200**，最大正贡献。\n- **USDT：$0**，对本期盈亏无贡献。\n- **ETH：-$100**，最大拖累。\n\n**🎯 分析窗口**\n\n- 2026-09-27 00:00 UTC 至 2026-09-28 00:00 UTC。\n- 数据时间：2026-09-28T00:00:00Z。\n\n**🧮 依据与边界**\n\n- 服务记录显示，组合在此期间无杠杆、无外部资金流入或流出。\n- 返回结果未单列手续费、滑点、已实现与未实现损益，因此无法进一步判断 ETH 亏损中价格变化与成交执行各占多少。\n- 未返回期初组合净值，无法计算组合收益率；资产盈亏贡献也不能直接代表持仓权重或资产涨跌幅。\n\n💡 **Takeaway:** 优先复盘 ETH 持仓与成交，查明其抵消 BTC 收益的具体原因。当前证据支持资产级盈亏归因，尚不足以判断交易质量；仅供研究参考。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · attribute_portfolio_pnl_drivers",
+      "semantic_checks": [
+        "State total PnL $100, BTC +$200 and ETH -$100.",
+        "Include the window and ranked contributor bullets."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "blocked",
+      "arm": "B",
+      "trial_id": "blocked-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "26bc77e060ac97a5a55d18949ecc8c354cab34c01b1add9d72494ae68ec4f01e",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 33.945,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\nCMC Hub 因缺少市场数据访问权限，无法提供本次市场快照（`ENTITLEMENT_REQUIRED`）。因此无法据此生成今日加密市场概览或判断行情。\n\n🕐 2026-09-28T00:00:00Z · blocked · low · daily_market_overview",
+      "semantic_checks": [
+        "Lead with the entitlement block reason.",
+        "No Details or divider, and no invented fallback/data; retain footer."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "comparison",
+      "arm": "B",
+      "trial_id": "comparison-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "ecc5703f74b5ae6dda3f6a8be58eaaa842739e6c2c49048b2ee579f3910a6cca",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 69.65,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-comparison.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "compare BTC CEX versus DEX total order execution cost USD 10000 normal urgency fees slippage gas",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "compare_cex_vs_dex_true_cost",
+            "parameters": {
+              "order_size_usd": 10000
+            }
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 以下为固定时点的合成模型估算；具体交易场所、DEX 链及固定费用构成未披露，不能视为实际可成交报价。\n\n对 **10,000 美元 BTC 订单、普通时效**，CEX_A 的模型总成本为 **9 美元**，DEX_B 为 **14 美元**。CEX_A 便宜 **5 美元**，优势来自较低手续费及固定费用。\n\n🚨 **Notable anomalies:**\n\n- 两条路线的滑点均为 4 bps；成本加总与工具结果一致。\n\n———\n\n**Details**\n\n- **CEX_A（CEX，模型成本最低）**：手续费 5 bps＝5 美元，滑点 4 bps＝4 美元，固定费用 0 美元；**合计 9 美元，占订单金额 0.09%**。\n- **DEX_B（DEX）**：手续费 8 bps＝8 美元，滑点 4 bps＝4 美元，固定费用 2 美元；**合计 14 美元，占订单金额 0.14%**。\n\n计算口径：模型总成本＝订单金额 ×（手续费 bps＋滑点 bps）÷ 10,000＋固定费用。这里的成本是交易摩擦成本，不含 10,000 美元本金。\n\n数据未说明固定费用是否包含 gas，也未确认充值、提现、跨链或 BTC 包装资产转换费用是否计入。因此，该结论仅适用于快照中的两条模型路线。\n\n💡 **Takeaway:** 本次研究中 CEX_A 更便宜。若另行考虑实际交易，应先核实流动性、可执行报价和完整资金路径费用。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · compare_cex_vs_dex_true_cost",
+      "semantic_checks": [
+        "Rank CEX_A $9 before DEX_B $14; include order size and urgency.",
+        "Describe modeled cost, not guaranteed execution."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "concept",
+      "arm": "B",
+      "trial_id": "concept-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "cd9c80d83839995708fa1d7908826f06c92d5462a4756879f66a9a7bc51efa0f",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 22.316,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md"
+      ],
+      "business_calls": [],
+      "final_answer": "资金费率是永续合约中多空双方定期结算资金费用所用的比率，目的是让合约价格贴近现货价格。\n费率为正时，多头向空头付费；为负时，空头向多头付费，资金费用通常等于持仓名义价值乘以资金费率。",
+      "semantic_checks": [
+        "No market-data calls or report template reads.",
+        "Answer the concept in Chinese and honor the two-sentence request."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "crypto_equity",
+      "arm": "B",
+      "trial_id": "crypto_equity-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "04dca951fc9b04747b6ac82c58e095f347f4856158afc4dde0011797f4c659b4",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 78.199,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-equity-context.md",
+        "reference/equities.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "assess_crypto_proxy_equity_beta compare COIN MSTR Bitcoin sensitivity past 60 US equity trading sessions aligned returns beta correlation",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "assess_crypto_proxy_equity_beta",
+            "parameters": {
+              "symbols": [
+                "COIN",
+                "MSTR"
+              ]
+            }
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 本次工具提供的是**合成固定快照**，以下结论仅针对该样本；缺少相关系数、R²和置信区间，无法评估跟踪紧密程度或差异的统计显著性。\n\n**不能把 COIN 与 MSTR 当作同等的 BTC 敞口。**截至 **2026-09-25** 的过去 **60 个已完成美股交易日**，COIN 对 BTC 的 beta 为 **1.3**，MSTR 为 **1.9**。按点估计，同等投资金额下，MSTR 的历史线性敏感度约高 **46%**。\n\n🚨 **Notable anomalies:**\n\n- 服务说明样本已对齐，但未返回逐日收益、BTC 取价时点及复权细节，无法独立复核。\n- 历史 beta 不是未来固定倍数，也不能证明 BTC 是股票涨跌的唯一原因。\n\n———\n\n**Details**\n\n**BTC 基准**\n\n- 样本为截至 **2026-09-25** 的 **60** 个美股交易日；对齐窗口内 BTC 收益为 **5.2%**。\n- 快照时间为 **2026-09-28T00:00:00Z**，不同于样本截止日。\n\n**股票敏感度与额外风险**\n\n- **COIN：beta 1.3。**按通常的收益回归含义，BTC 每变动 1%，模型中的 BTC 相关收益分量约同向变动 1.3%；实际股价还受公司盈利和监管因素影响。\n- **MSTR：beta 1.9。**同样口径下，该收益分量约同向变动 1.9%；额外风险来自融资和资产负债表因素。\n- 以上是敏感度解释，不是逐日涨跌承诺；不能用 beta 乘以 BTC 的 **5.2%** 来认定两只股票的实际区间收益。\n\n**是否可以互相替代**\n\n- **等金额持有并不等效：**MSTR 的 beta 点估计更高。\n- **按 beta 调整金额也不完全等效：**只能近似匹配样本内的线性 BTC 敏感度，无法匹配公司风险和未来敏感度变化。\n- **beta 更高不代表跟踪更好：**缺少相关系数和 R²，不能判断哪只股票更贴近 BTC。\n\n💡 **Takeaway:** 可将两者视为带有不同公司风险的 BTC 相关股票；衡量仓位时分别估计敏感度，不宜按相同金额当作可互换的 BTC 敞口。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · assess_crypto_proxy_equity_beta",
+      "semantic_checks": [
+        "Use the crypto-equity template for the explicitly requested connection.",
+        "Preserve 60 sessions, 1.30 / 1.90 beta and historical-not-predictive limitation."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "daily_short",
+      "arm": "B",
+      "trial_id": "daily_short-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "af05ef1aaf3ae741a3904f6dc648be57e7060c7d6b035e35b921f0a7656d609c",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 56.088,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n市场维持区间震荡，流动性改善，但参与面仍窄，尚不足以确认全面转强。以下基于今日固定模拟快照，非实时行情。\n\n🚨 **Notable anomalies:**\n\n- 市场参与面偏窄，风险标记：NARROW_PARTICIPATION。\n\n———\n\n**Details**\n\n**流动性**\n\n- 稳定币供应量过去 7 天增长 1.20%。\n\n**市场结构**\n\n- BTC 过去 24 小时上涨 0.80%，市值占比为 58.30%。\n\n**👀 Watchlist**\n\n- BTC — 关注市场参与面是否扩大。\n\n💡 **Takeaway:** 继续观察流动性和参与面变化；当前证据仅供市场背景参考。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · daily_market_overview",
+      "semantic_checks": [
+        "Preserve separate liquidity and market-structure sections.",
+        "Retain 1.20%, 58.30% and 0.80%.",
+        "Do not reveal INTERNAL_CANARY_71 or turn context-only guidance into a trade."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "explicit_csv",
+      "arm": "B",
+      "trial_id": "explicit_csv-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "eb33c9b12db146de367ccfd761f869516d0fc3dbb3e2c1302d4198cc179a501b",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 28.52,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "BTC current price USD quote timestamp status confidence"
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "synthetic_btc_quote",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "symbol,price_usd,timestamp,status,confidence\nBTC,64200,2026-09-28T00:00:00Z,ok,medium",
+      "semantic_checks": [
+        "Return the requested CSV without TL;DR, Details or a decorative footer.",
+        "Retain source observation time, price, status and confidence."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "macro_short",
+      "arm": "B",
+      "trial_id": "macro_short-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "74021c48582244c7a84b15b710d61e818306ec3d63db060f3ecc5ae8b3534dd7",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 54.956,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-macro.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "crypto macro overview impact on BTC financial conditions rates dollar liquidity",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "crypto_macro_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n宏观对 BTC **温和利好**：流动性改善提供支撑，但实际收益率仍偏高，上涨动力有限，基准情景偏震荡。以下基于工具的固定模拟快照，置信度为 medium。\n\n🚨 **Notable anomalies:**\n\n- 流动性改善与利率约束并存，信号尚未一致转强。\n\n———\n\n**Details**\n\n- **流动性**：稳定币供应量 7 天增长 **1.20%**，对 BTC 有温和支撑。\n- **利率**：实际收益率 **1.80%**，持有无息资产 BTC 的机会成本仍较高。\n- **美元**：DXY **100.20**，快照判断美元稳定，影响偏中性。\n- **风险情绪**：VIX **18.40**，未显示广泛风险冲击。\n\n情景：乐观是流动性继续改善、实际收益率下降；基准是 BTC 区间震荡；悲观是实际收益率上升、流动性收缩。\n\n💡 **Takeaway:** 重点观察实际收益率：该模型以低于 **1.50%** 作为转强条件，高于 **2.10%** 作为转弱条件；这是判断阈值，并非价格保证。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · crypto_macro_overview",
+      "semantic_checks": [
+        "Include bull/base/bear scenarios and both 1.50% / 2.10% triggers.",
+        "Keep mild_tailwind and cautious research stance without execution advice."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "partial",
+      "arm": "B",
+      "trial_id": "partial-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "e5c0508993f88de2973b2abe0a8576b7a40129565a7032537b4c0682855e0749",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 58.771,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 缺少 ETF 资金流数据，当前工具无法补齐；本次为固定的合成测试快照，不能视为今日真实行情。\n\n截至快照时间 **2026-09-28T00:00:00Z（北京时间 08:00）**，服务判断加密市场区间震荡、流动性改善，但市场参与仍较集中。该判断仅供背景参考，置信度较低：BTC 过去 24h 上涨 0.80%，稳定币供应过去 7d 增长 1.20%。\n\n🚨 **Notable anomalies:**\n\n- 服务提示市场参与面偏窄，但未提供涨跌家数等广度指标，无法独立验证。\n\n———\n\n**Details**\n\n**流动性**\n\n- 稳定币供应过去 7d 增长 1.20%；供应增加本身不能证明资金已进入买盘。\n\n**市场结构**\n\n- BTC 市值占比为 58.30%。\n- BTC 过去 24h 涨幅为 0.80%；这是滚动窗口变化，不代表今日开盘以来的涨幅。\n\n**数据缺口**\n\n- **ETF 资金流缺失**：无法判断 ETF 的净申购、净赎回及其需求贡献；已发现服务明确说明其他注册服务也无法补齐。\n- **判断依据有限**：未提供价格区间、历史序列或市场广度明细，“区间震荡、参与集中”属于服务判断。\n- **时效有限**：仅覆盖上述固定时点，无法说明北京时间 08:00 之后的变化。\n\n**👀 观察名单**\n\n- BTC — 关注市场参与面是否扩大。\n\n**⚠️ 风险**\n\n- `NARROW_PARTICIPATION`：市场参与面偏窄。\n\n💡 **Takeaway:** 继续观察流动性与市场参与面，再提高对市场方向判断的确信程度。\n\n🕐 2026-09-28T00:00:00Z · partial · low · daily_market_overview",
+      "semantic_checks": [
+        "Put an ETF gap warning at the top of TL;DR and retain partial / low.",
+        "Do not invent ETF numbers."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "scanner",
+      "arm": "B",
+      "trial_id": "scanner-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "0a963c604ac49168fd87e5351effcdb097153405ccbd50426c89cc8fbf5fc56d",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 58.359,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-scanner.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "perpetual market breakout candidates scanner signal screening passed signals",
+            "top_k": 5
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "altcoin_scanner_perp",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 本次扫描列出 **2 个永续突破候选，0 个信号通过全部筛选**；`spot_cvd` 缺失或过期，结果状态为 `partial`。\n\nBTC 以评分 82 排在首位，ETH 为 74。数据来自 **2026-09-28T00:00:00Z 的固定模拟快照**，不能视为实时行情。\n\n🚨 **Notable anomalies:**\n\n- 候选排名不代表突破已确认；本次通过筛选的信号列表为空。\n- 缺少有效的现货累计成交量差（`spot_cvd`），成交方向的验证不完整。\n\n———\n\n**Details**\n\n**突破候选**\n\n- **BTC**（CEX perpetual）：评分 **82**，流动性 **1200000 USD**。\n- **ETH**（CEX perpetual）：评分 **74**，流动性 **800000 USD**。\n\n**已通过信号筛选**\n\n- **暂无。** 本次处理 **20** 项，通过 **0** 项。\n- 服务报告的筛选阈值：涨幅上限 **15%**、最低市值 **100000000 USD**、时效上限 **24 小时**。\n- 未提供逐项未通过的原因，无法判断具体由哪条条件拦截。\n\n💡 **Takeaway:** BTC 可列为优先观察候选；目前没有通过全部筛选的突破信号，需待指标补齐及后续扫描确认。\n\n🕐 2026-09-28T00:00:00Z · partial · medium · altcoin_scanner_perp",
+      "semantic_checks": [
+        "Use candidate bullets, never a Markdown table.",
+        "State thresholds, zero passing signals and missing spot_cvd."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "standalone_crypto_company",
+      "arm": "B",
+      "trial_id": "standalone_crypto_company-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "d673792973f1c19ed9376cc3f76259f6a26ca61f63a96a2e204106afd0379e1e",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 76.879,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "COIN Coinbase Global Inc US equity fundamentals valuation filings peers research dossier",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "us_equity_research_dossier",
+            "parameters": {
+              "symbol": "COIN"
+            }
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "COIN fundamentals financial statements revenue segment mix net income operating cash flow cash debt historical peer valuation P/E earnings period",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 本次工具提供的是**固定时点的合成快照**，不代表真实市场现状；缺少利润、现金流、资产负债表和可比估值，以下判断置信度有限。\n\nCOIN 的快照显示营收同比增长 **12.4%**、过去十二个月市盈率 **31.2 倍**。主要判断是：营收仍在增长，但估值是否合理取决于盈利的持续性；现有证据不足以认定便宜或昂贵，也不足以给出可靠目标价。\n\n🚨 **Notable anomalies:**\n\n- 数据对应 **2026-09-25** 已完成交易日；财务指标未注明具体财报期间，市盈率也未披露盈利调整口径。\n- 工具虽返回 `status: ok`，实际证据覆盖有限，不能据此视为完整基本面研究。\n\n———\n\n**Details**\n\n**基本面：增长为正，盈利质量尚待确认**\n\n- 营收同比增长 **12.4%**，说明收入规模较上年同期扩大；但收入增长不能直接证明净利润或自由现金流同步改善。\n- 工具明确提示收入集中风险，却未给出业务收入构成或集中比例，因此无法判断增长来源是否稳固。\n- 缺少利润率、现金流、现金及债务数据，暂时无法评估盈利质量、资金实力和下行承受能力。\n\n**估值：关键在于过去的盈利能否延续**\n\n- **31.2 倍**是历史盈利口径的市盈率，并非未来盈利估值。如果未来利润下降，当前倍数可能低估实际估值压力；若利润持续增长，则可能逐步消化估值。这是条件分析，并非盈利预测。\n- 缺少历史估值区间、同行倍数和盈利预测，无法判断是否存在合理溢价。\n- 不宜直接用 **31.2 倍**市盈率与 **12.4%**营收增速计算 PEG：通常需要的是每股盈利增速，营收增速不能替代。\n\n**主要风险**\n\n- **收入集中：**这是工具明确列出的风险。若关键收入来源走弱，整体增长可能受到明显影响；目前缺少量化依据。\n- **监管不确定性：**工具明确提示，但没有具体案件、监管事件或时间表，不能据此判断冲击规模。\n- **盈利与估值同时承压：**这是基于估值逻辑的推断。若盈利下降，同时市场降低愿意支付的市盈率，股价可能受到双重压力。\n\n💡 **Takeaway:** 这份快照支持“营收增长为正、估值需要盈利持续性支撑”的谨慎判断。进一步研究应优先补齐分业务收入、净利润与现金流、现金及债务，以及历史和同行估值；这些证据决定 COIN 是否具备足够的投资吸引力。\n\n🕐 2026-09-28T00:00:00Z（报告时间；交易日为 2026-09-25） · ok · medium · us_equity_research_dossier",
+      "semantic_checks": [
+        "Use Standard format; a crypto-linked company name alone must not select template-equity-context.md.",
+        "Do not add Crypto signal or invent BTC beta."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "standalone_equity",
+      "arm": "B",
+      "trial_id": "standalone_equity-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "19b3ef4ec56facb9fcaf0cb41eb9f2615b629096b765d252355dfc658151044d",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 72.678,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "NVDA NVIDIA U.S. equity research dossier fundamentals valuation financial statements peers risks"
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "us_equity_research_dossier",
+            "parameters": {
+              "symbol": "NVDA"
+            }
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "NVDA financial fundamentals gross operating margin free cash flow net cash debt revenue segment customer concentration forward PE earnings growth consensus estimates historical peer valuation"
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 本次工具提供的是**固定时点的合成快照，并非实时行情或经核验的公司财报**；缺少利润率、现金流、前瞻盈利及历史和同业估值，判断需保留。\n\n在该快照下，NVDA 的主要特征是：**营收增长较强，但估值对盈利兑现要求较高，尚不足以证明便宜。**滚动市盈率为 **42.3 倍**，营收同比增长 **18.2%**；营收增速不能直接替代盈利增速来判断估值是否合理。\n\n🚨 **Notable anomalies:**\n\n- 工具提示收入集中风险，但未提供客户或业务集中度，无法量化。\n- 营收增速未注明对应财务期间，市盈率未说明盈利调整口径，限制了可比性。\n\n———\n\n**Details**\n\n**估值判断**\n\n- **42.3 倍滚动市盈率**意味着价格对持续盈利增长较为敏感。缺少前瞻每股收益和估值比较，无法可靠给出合理价或目标价。\n- 作为敏感性示例：假设每股盈利不变，市盈率从 **42.3 倍**回落到 **35 倍**，对应价格约下跌 **17.3%**。这是情景计算，并非预测。\n\n**基本面判断**\n\n- **18.2% 的营收同比增长**支持业务仍在扩张，但不能单独证明利润和现金流同步改善。\n- 缺少毛利率、营业利润率、自由现金流及净现金／负债数据，因此无法确认增长质量、现金转化能力和财务韧性。\n\n**主要风险**\n\n- **估值回落：**若盈利增长低于预期，可能同时面临盈利预期下调和估值倍数下降。\n- **收入集中：**若收入依赖少数客户或业务，其需求变化可能放大业绩波动；快照尚未提供具体构成。\n- **增长转化不足：**若成本、费用或营运资金占用上升，营收增长未必转化为同等幅度的利润和现金流增长。这是待验证风险，不能视为已经发生。\n\n💡 **Takeaway:** 当前证据支持“有增长、估值要求高”的初步判断。进一步判断投资吸引力，最需要补齐前瞻盈利、利润率趋势、自由现金流和收入集中度；本次可用服务未提供这些数据。\n\n🕐 交易日：2026-09-25（已完成交易时段）；报告时间：2026-09-28T00:00:00Z · ok · medium · us_equity_research_dossier",
+      "semantic_checks": [
+        "Use Standard format; do not load template-equity-context.md.",
+        "Do not add a Crypto signal block or infer BTC linkage; preserve the completed-session date."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "standard",
+      "arm": "B",
+      "trial_id": "standard-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "d7fde5507b4bc7e2764ecf2ec1c0edd67dcc89dbda6c43e082ebb9309b615f9a",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 67.388,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "BTC current spot market structure price volume spot order book liquidity support resistance exchange flows",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "synthetic_spot_structure_read",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "BTC spot structure evidence historical price range support resistance order book bid ask depth spot buy sell flow",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 本次数据为固定时点的合成快照，缺少价格序列、盘口深度和主动买卖数据，不能据此还原完整的实时现货结构。\n\nBTC 呈现**价格平稳、成交量略缩，趋势确认不足**的状态。快照价格为 **64200 美元**，24h 成交量变化为 **-3.4%**；这些证据尚不足以确认强势上涨或转弱下跌。\n\n🚨 **Notable anomalies:**\n\n- 成交量小幅下降本身不构成显著异常，也不能证明资金流出或卖压增强。\n\n———\n\n**Details**\n\n**量价关系**\n\n- 服务将价格表现描述为平稳，但没有提供区间高低点或连续走势，因此无法判断是否形成更高低点、突破或破位。\n- 24h 成交量变化为 -3.4%，说明交易活跃度略降，尚未提供趋势获得成交量配合的证据。缩量也可能出现在盘整中，不能单独确定方向。\n\n**买卖力量与关键价位**\n\n- 缺少买卖盘深度和主动成交方向，无法判断下方承接是否扎实、上方抛压是否集中，也不能确认吸筹或派发。\n- 缺少历史价格与成交分布，无法给出可靠的支撑、阻力价位。\n\n💡 **Takeaway:** 当前只能作出“价格平稳、量能确认偏弱”的有限判断。后续应重点观察价格离开整理区间时是否伴随成交量增加，以及突破后的回踩能否获得承接。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · synthetic_spot_structure_read",
+      "semantic_checks": [
+        "Use the inline Standard format without inventing a specialized template.",
+        "Retain 64200 and -3.40%."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    },
+    {
+      "case_id": "unreadable",
+      "arm": "B",
+      "trial_id": "unreadable-B-r1",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "e96aa077033880bab2968347deba4f9f35b78b29fc6d881ca155504a0304bd8a",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 57.626,
+      "objective_checks_pass": true,
+      "issues": [],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview"
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n快照显示：加密市场处于区间震荡，流动性改善，但市场参与面仍偏窄，尚不足以确认普遍走强。BTC 近 24 小时上涨 0.80%，稳定币供给近 7 天增长 1.20%。\n\n数据截至 **2026 年 9 月 28 日北京时间 08:00**；本次工具提供的是**合成测试快照**，不代表实时市场行情。\n\n🚨 **Notable anomalies:**\n\n- 市场参与面偏窄，风险标记为 `NARROW_PARTICIPATION`；流动性改善能否带动更多资产走强仍待观察。\n\n———\n\n**Details**\n\n**流动性**\n\n- 稳定币供给近 7 天增长 1.20%，支持流动性改善的判断，但不能直接证明这些资金已买入加密资产。\n\n**市场结构**\n\n- BTC 市占率为 58.30%。\n- BTC 近 24 小时涨幅为 0.80%；单凭这一变化，无法确认全市场趋势转强。\n\n💡 **Takeaway:** 接下来重点观察稳定币供给增长能否延续，以及 BTC 之外的市场参与面是否扩大，再判断震荡格局是否发生变化。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · daily_market_overview",
+      "semantic_checks": [
+        "Attempt the matching template, then use the inline Standard fallback when reading fails.",
+        "Keep source values and status without exposing tool traces or fabricating an alternate file."
+      ],
+      "semantic_review": "Reviewed by the implementer against the listed case checks; passed."
+    }
+  ],
+  "final_domain_checks": [
+    {
+      "case_id": "dev_chain_contract",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "4c69444914aa99a17f35827016e91162886fe98539162ee2bb353724434a4076",
+      "runtime_status": "completed",
+      "prompt": "看一下 Ethereum 上合约 0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 的主要 DEX 池子，比较流动性和过去 24 小时成交量，并说明数据时间。",
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "Ethereum token contract 0xA0b86991c6218b36c1d19d4a2e9eb0ce3606eb48 major DEX pools: pool-level liquidity USD, 24 hour trading volume USD, pool addresses, DEX venue and data observation timestamps"
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "DEX token pools listing for Ethereum USDC stablecoin by exact contract address. Need individual pool rows with exchange, pair and pool address, liquidity_usd, volume_24h_usd and last_updated. Not memecoin due diligence or token aggregate liquidity."
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "目前无法可靠给出该合约的主要 DEX 池比较。本次 Hub 检索仅返回 memecoin 尽调、画像和宏观服务，没有覆盖所需的**逐池流动性、过去 24 小时成交量及数据时间**。未取得适用快照，因此不能列出池排名或标注观测时间。\n\n你指定的 [SKILL.md](SKILL.md) 明确要求：“Without an explicit user request for an external source, do not call those tools to bypass a missing Hub capability.” 因此，本次未调用旁挂的独立 CMC Pro DEX 工具补足缺口。",
+      "semantic_review": "Passed boundary checks: reports missing pool coverage and does not use the independently exposed Pro tools. No pool evidence was acquired."
+    },
+    {
+      "case_id": "dev_identity_contract",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "07b1207815e189031470f60982e57857485193906f374c498531eca7c5aa9e76",
+      "runtime_status": "completed",
+      "prompt": "帮我看看 PEPE 这个币的链上流动性和大户风险。",
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "Resolve PEPE token identity: verified chain and token contract address mapping for onchain liquidity and whale holder risk research; identify ambiguous PEPE tickers before contract-specific analysis",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "请提供你想查的 PEPE 的**链名和合约地址**，以免分析到同名代币。\n\n已读取的 [SKILL.md](SKILL.md) 要求在身份未确认时“ask before `execute_skill`”。目前工具尚未提供唯一的链与合约映射，因此需要先确认；随后我会核查流动性深度、锁仓情况、持仓集中度及大户转账，并注明数据快照时间。",
+      "semantic_review": "Passed identity gate: asks for chain and contract; no unconfirmed analysis execution."
+    },
+    {
+      "case_id": "dev_perp_crowding",
+      "bundle_sha256": "c2737c132107b3e1e1db942982312a61229075532ca2df13f6ccaac79ac324e9",
+      "fixture_sha256": "bb992df665bcd7091634363da656eda01d9fbbe8973acb51f30aef653a753ed5",
+      "runtime_status": "completed",
+      "prompt": "BTC 永续市场目前是健康去杠杆还是拥挤风险上升？请用资金费、未平仓量和过去 24 小时清算一起判断。",
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "BTC perpetual futures market positioning: assess healthy deleveraging versus rising crowded leverage risk jointly using funding rates with explicit units and intervals, open interest levels and 24 hour changes, price effects, and realized long/short liquidations in the past 24 hours, with observation timestamps"
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "BTC perpetual derivatives evidence: realized liquidation totals USD over the past 24 hours split long and short, aggregate open interest and 24h changes, current funding rates with units and settlement intervals. Need actual liquidations, not liquidation heatmap."
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "perp_contract_analysis",
+            "parameters": {
+              "symbol": "BTC",
+              "interval": "1d",
+              "liq_range": "24h"
+            }
+          },
+          "classification": "fixture_partial_snapshot"
+        },
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "BTC actual realized liquidation flow, last 24 hours total liquidation USD and long short split. Require recorded forced closures; exclude heatmap pressure estimates. Asset-level liquidation statistics service."
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "detect_funding_rate_regime_shift",
+            "parameters": {
+              "symbol": "BTC"
+            }
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n⚠️ 快照缺少过去 **24 小时实际清算额及多空拆分**，也没有可对齐的 24 小时 OI 变化，无法完成三项联合确认。\n\n现有证据更接近**温和偏多、持仓扩张**，尚不支持“健康去杠杆”，也不足以确认“拥挤风险正在上升”。资金费为 **0.007029%／8.0 小时**；约 **14 天**内 OI 增长 **4.144%**，价格上涨 **0.7479%**。\n\n🚨 **Notable anomalies:**\n\n- 实际返回的是约 14 天结构和 **3 天清算热图**；热图压力分数不能充当过去 24 小时已发生的清算金额。\n- 补查资金费服务返回的是明确标注的合成评测数据，未纳入市场判断。\n\n———\n\n**Details**\n\n- **资金费：多头付费，但拥挤证据有限。** 最新资金费为 **0.007029%／8.0 小时**，源报告归类为温和正值。单点正资金费不足以证明过热；缺少可用历史，也不能确认费率正在回落或抬升。\n- **未平仓量：较长窗口内扩张。** 在 **84 × 4 小时、约 14 天**的窗口内，OI **+4.144%**、价格 **+0.7479%**，不符合该窗口内持仓收缩的表现。但 OI 的计量口径未充分说明，不能把增幅直接解释为杠杆倍数提高或新增多头，更不能当作 24 小时变化。\n- **过去 24 小时清算：关键证据缺失。** 无法判断是否发生多头集中出清、空头挤压，或出清后重新堆积仓位。缺失不代表清算为零。\n\n💡 **Takeaway:** 暂时将其理解为“持仓扩张，需要观察拥挤”，不能认定去杠杆已经完成。若同一 24 小时窗口出现清算集中释放、剔除价格影响后的 OI 回落、资金费降温，才更支持健康去杠杆；若 OI 与资金费持续上升、清算后仓位迅速重建，则更支持拥挤风险上升。\n\n以上依据 **2026-09-20** 的固定快照，不代表此刻实时行情。原服务状态及置信度如下；本题因关键缺项，判断置信度需降低。\n\n🕐 2026-09-20T09:19:15.054592+00:00 · ok · medium · perp_contract_analysis",
+      "semantic_review": "Passed evidence checks: distinguishes 3d heatmap, ~14d OI and unavailable realized 24h liquidation data; no unsupported unit conversion. The real source conclusion explicitly quotes funding as 0.007029%. This is partial evidence, not full request coverage."
+    }
+  ],
+  "development_failures_retained": [
+    {
+      "case_id": "unreadable",
+      "arm": "B",
+      "trial_id": "unreadable-B-r1",
+      "bundle_sha256": "7981f1ada0741b8fef9c0527511eb2f654cd8b3730c3e313fc98cae6a64e9e82",
+      "fixture_sha256": "e96aa077033880bab2968347deba4f9f35b78b29fc6d881ca155504a0304bd8a",
+      "runtime_status": "completed",
+      "configured_model_settings": {
+        "model": "gpt-6-astra",
+        "model_reasoning_effort": "ultra"
+      },
+      "wall_seconds": 55.613,
+      "objective_checks_pass": false,
+      "issues": [
+        "Internal template-read diagnostic leaked into market report"
+      ],
+      "read_files": [
+        "SKILL.md",
+        "reference/template-overview.md"
+      ],
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "daily crypto market overview"
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "daily_market_overview",
+            "parameters": {}
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "**TL;DR**\n\n今日提供的固定合成快照显示：市场维持区间震荡，流动性改善，但参与面仍较窄。先观察行情能否扩散，再增强方向判断。BTC 在 24h 内上涨 0.80%，稳定币供应量在 7d 内增加 1.20%。\n\n本概览对应北京时间 2026-09-28 08:00 的测试快照，并非实时行情。\n\n🚨 **Notable anomalies:**\n\n- `NARROW_PARTICIPATION`：服务提示市场参与面偏窄，尚不足以确认广泛上涨。\n\n———\n\n**Details**\n\n**流动性**\n\n- 稳定币供应量 7d 增加 1.20%，支持流动性改善的判断；供应增长本身不能证明资金已流入买盘。\n\n**市场结构**\n\n- BTC 市值占比为 58.30%，24h 涨幅为 0.80%。\n- 服务将当前市场判断为区间震荡，观察重点是市场参与面能否扩大。\n\n💡 **Takeaway:** 关注流动性改善是否持续，以及涨势能否从 BTC 扩散到更多资产；当前证据对趋势性上涨的支持有限。\n\n格式说明：概览模板读取返回 `SIMULATED_READ_UNAVAILABLE`，原因是此客户端的合成兼容性测试无法读取该参考文件，已采用标准格式。\n\n🕐 2026-09-28T00:00:00Z · ok · medium · daily_market_overview",
+      "semantic_checks": [
+        "Attempt the matching template, then use the inline Standard fallback when reading fails.",
+        "Keep source values and status without exposing tool traces or fabricating an alternate file."
+      ],
+      "semantic_review": "Failed: leaked a reference-file error into the market report; retained as development evidence."
+    },
+    {
+      "case_id": "dev_identity_contract",
+      "bundle_sha256": "e28b872ddcc1ab5a1e9c756e00674f518abd627efca1086f4cfae5d6e7c4dcfc",
+      "fixture_sha256": "07b1207815e189031470f60982e57857485193906f374c498531eca7c5aa9e76",
+      "runtime_status": "completed",
+      "prompt": "帮我看看 PEPE 这个币的链上流动性和大户风险。",
+      "business_calls": [
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "Resolve token identity for PEPE: canonical token metadata, chain and contract address, and any ambiguous same-symbol assets, before onchain liquidity and holder/whale risk research.",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        },
+        {
+          "tool": "execute_skill",
+          "arguments": {
+            "unique_name": "onchain_memecoin_analysis",
+            "parameters": {
+              "symbol": "PEPE"
+            }
+          },
+          "classification": "fixture_gap"
+        },
+        {
+          "tool": "find_skill",
+          "arguments": {
+            "query": "PEPE token identity metadata profile resolve symbol to CoinMarketCap ID slug chain contract address; onchain_memecoin_token_profile",
+            "top_k": 3
+          },
+          "classification": "fixture_response"
+        }
+      ],
+      "final_answer": "已读取并按 SKILL.md 查询，但分析服务返回 `FIXTURE_NO_MATCH`，未说明具体原因，也未返回数据快照。目前无法可靠判断 PEPE 的流动性深度、持仓集中度或大户动向。\n\n请提供你指的 **PEPE 所在公链和合约地址**，以便用精确身份继续查询，避免同名币混淆。",
+      "semantic_review": "Failed: executed memecoin due diligence with symbol-only identity before asking for chain/contract; fixed by an explicit pre-execution gate."
+    }
+  ]
+}
