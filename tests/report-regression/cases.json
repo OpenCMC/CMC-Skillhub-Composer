@@ -1,0 +1,1507 @@
+{
+  "provenance": "Hand-authored synthetic report-contract fixtures. These are not production service contracts, live market observations, or a search-relevance benchmark.",
+  "common_agent_instruction": "请先用 read_skill_file 读取 SKILL.md，并按这个 skill 处理下面的用户问题。可用工具提供固定时点的数据快照，引用数据自身的时间。只使用本次提供的工具。",
+  "fixture_serialization_for_sha256": "json.dumps(fixture, ensure_ascii=False, indent=2) + newline, UTF-8",
+  "cases": [
+    {
+      "id": "daily_short",
+      "split": "dev",
+      "prompt": "给我一份简短的今日加密市场概览。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-overview.md",
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "daily_market_overview",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Preserve separate liquidity and market-structure sections.",
+        "Retain 1.20%, 58.30% and 0.80%.",
+        "Do not reveal INTERNAL_CANARY_71 or turn context-only guidance into a trade."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "daily_market_overview",
+                  "skillDescription": "Top-down daily crypto market overview covering liquidity, market structure and risk. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "daily_market_overview"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"decision_report\": {\"title\": \"Daily market overview\", \"conclusion\": \"The market is range-bound; liquidity is improving but participation remains narrow.\", \"market_analysis\": \"## Liquidity\\n- Stablecoin supply increased 1.20% over 7d.\\n\\n## Market structure\\n- BTC dominance is 58.30%; BTC changed 0.80% over 24h.\"}, \"watchlist\": [{\"symbol\": \"BTC\", \"reason\": \"Watch whether market participation broadens.\"}], \"risk_flags\": [\"NARROW_PARTICIPATION\"], \"missing_or_stale_inputs\": [], \"action_guidance\": {\"bias\": \"context_only\", \"reference_action\": \"Monitor liquidity and participation before strengthening the judgment.\"}, \"signal_board\": [{\"internal\": \"INTERNAL_CANARY_71\"}], \"coverage_diagnostics\": {\"internal\": \"INTERNAL_CANARY_71\"}, \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"daily_market_overview\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "daily_market_overview": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "macro_short",
+      "split": "dev",
+      "prompt": "现在宏观环境对 BTC 有什么影响？简短解读一下。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-macro.md",
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "crypto_macro_overview",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Include bull/base/bear scenarios and both 1.50% / 2.10% triggers.",
+        "Keep mild_tailwind and cautious research stance without execution advice."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "crypto_macro_overview",
+                  "skillDescription": "Crypto macro regime, risk budget, bull/base/bear scenarios and upgrade/downgrade triggers. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "crypto_macro_overview"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"macro_regime\": \"mild_tailwind\", \"risk_budget\": {\"max_position_pct\": 25, \"leverage\": \"none\", \"stance\": \"cautious\"}, \"decision_report\": {\"conclusion\": \"Easing liquidity offers mild support to BTC, while real yields limit conviction.\", \"reasoning_summary\": [{\"topic\": \"Liquidity\", \"read\": \"Improving\", \"evidence\": \"Stablecoin supply +1.20% over 7d\", \"implication\": \"Mild support\"}, {\"topic\": \"Rates\", \"read\": \"Restrictive\", \"evidence\": \"Real yield 1.80%\", \"implication\": \"Limits upside conviction\"}, {\"topic\": \"Dollar\", \"read\": \"Stable\", \"evidence\": \"DXY 100.20\", \"implication\": \"Neutral\"}, {\"topic\": \"Volatility\", \"read\": \"Contained\", \"evidence\": \"VIX 18.40\", \"implication\": \"No broad risk shock\"}], \"bull_base_bear\": {\"bull\": \"Liquidity improves and real yields decline.\", \"base\": \"BTC remains range-bound.\", \"bear\": \"Real yields rise and liquidity contracts.\"}, \"upgrade_downgrade\": {\"upgrade_if\": \"Real yield falls below 1.50%.\", \"downgrade_if\": \"Real yield rises above 2.10%.\"}}, \"signal_board\": [{\"signal\": \"real_yield\", \"status\": \"restrictive\", \"direction\": \"flat\", \"key_value\": \"1.80%\", \"impact\": \"headwind\"}], \"missing_or_stale_inputs\": [], \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"crypto_macro_overview\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "crypto_macro_overview": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "scanner",
+      "split": "dev",
+      "prompt": "看看当前永续市场的突破候选，以及哪些已经通过信号筛选。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-scanner.md",
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "altcoin_scanner_perp",
+      "expected_status": "partial",
+      "semantic_checks": [
+        "Use candidate bullets, never a Markdown table.",
+        "State thresholds, zero passing signals and missing spot_cvd."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "altcoin_scanner_perp",
+                  "skillDescription": "Market-wide ranked perpetual candidates with applied thresholds, passing signals and coverage. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "altcoin_scanner_perp"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"status\": \"partial\", \"summary\": \"Two ranked perpetual candidates, but no live signal passed all filters.\", \"ranked_candidates\": [{\"symbol\": \"BTC\", \"network\": \"CEX perpetual\", \"score\": 82, \"liquidity_usd\": 1200000, \"price_change_24h\": 0.8}, {\"symbol\": \"ETH\", \"network\": \"CEX perpetual\", \"score\": 74, \"liquidity_usd\": 800000, \"price_change_24h\": 0.4}], \"filters\": {\"max_gain_pct\": 15, \"min_market_cap_usd\": 100000000, \"max_age_hours\": 24}, \"signals\": [], \"coverage\": {\"processed\": 20, \"passed\": 0}, \"missing_or_stale_inputs\": [\"spot_cvd\"], \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"altcoin_scanner_perp\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "altcoin_scanner_perp": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "comparison",
+      "split": "dev",
+      "prompt": "比较 10000 美元 BTC 订单在 CEX 和 DEX 的总成本，普通时效，只做研究。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-comparison.md",
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "compare_cex_vs_dex_true_cost",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Rank CEX_A $9 before DEX_B $14; include order size and urgency.",
+        "Describe modeled cost, not guaranteed execution."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "compare_cex_vs_dex_true_cost",
+                  "skillDescription": "Compare modeled BTC route costs for a caller-specified order_size_usd, normal urgency. Fixed synthetic snapshot for this test only.",
+                  "resultType": "comparison_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                      "order_size_usd": {
+                        "type": "number",
+                        "const": 10000
+                      }
+                    },
+                    "required": [
+                      "order_size_usd"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "compare_cex_vs_dex_true_cost"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"summary\": \"CEX_A has the lowest modeled cost for this order.\", \"order_size\": 10000, \"urgency\": \"normal\", \"ranked_candidates\": [{\"venue\": \"CEX_A\", \"venue_type\": \"CEX\", \"fee_bps\": 5, \"slippage_bps\": 4, \"fixed_cost_usd\": 0, \"modeled_total_cost_usd\": 9}, {\"venue\": \"DEX_B\", \"venue_type\": \"DEX\", \"fee_bps\": 8, \"slippage_bps\": 4, \"fixed_cost_usd\": 2, \"modeled_total_cost_usd\": 14}], \"recommended_route\": {\"venue\": \"CEX_A\", \"modeled_total_cost_usd\": 9}, \"decision_basis\": [\"Same BTC order size and normal urgency; costs are modeled estimates.\"], \"action_guidance\": {\"priority_actions\": [\"Verify liquidity and executable quotes before any separate trading decision.\"]}, \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"compare_cex_vs_dex_true_cost\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "compare_cex_vs_dex_true_cost": {
+            "type": "object",
+            "properties": {
+              "order_size_usd": {
+                "type": "number",
+                "const": 10000
+              }
+            },
+            "required": [
+              "order_size_usd"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "attribution",
+      "split": "dev",
+      "prompt": "分析我提供的测试组合 demo-balanced，在 2026-09-27 00:00 UTC 到 2026-09-28 00:00 UTC 的盈亏驱动；持仓和成交已随这个组合提供。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-attribution.md",
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "attribute_portfolio_pnl_drivers",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "State total PnL $100, BTC +$200 and ETH -$100.",
+        "Include the window and ranked contributor bullets."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "attribute_portfolio_pnl_drivers",
+                  "skillDescription": "Attribute the already supplied demo-balanced portfolio over the fixed stated 24h window; holdings are available, no additional positions required. Fixed synthetic snapshot for this test only.",
+                  "resultType": "attribution_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                      "portfolio_id": {
+                        "type": "string",
+                        "enum": [
+                          "demo-balanced"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "portfolio_id"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "attribute_portfolio_pnl_drivers"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"summary\": \"The supplied demo portfolio gained $100 over the stated 24h window.\", \"total_pnl_usd\": 100, \"pnl_window\": {\"start\": \"2026-09-27T00:00:00Z\", \"end\": \"2026-09-28T00:00:00Z\"}, \"primary_drivers\": [{\"name\": \"BTC\", \"pnl_usd\": 200}, {\"name\": \"USDT\", \"pnl_usd\": 0}, {\"name\": \"ETH\", \"pnl_usd\": -100}], \"best_bucket\": \"BTC\", \"worst_bucket\": \"ETH\", \"attribution_granularity\": \"asset\", \"decision_basis\": [\"The recorded supplied demo portfolio has no leverage or external cash flows during this window.\"], \"action_guidance\": {\"priority_actions\": [\"Review why ETH offset BTC gains; this is research context only.\"]}, \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"attribute_portfolio_pnl_drivers\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "attribute_portfolio_pnl_drivers": {
+            "type": "object",
+            "properties": {
+              "portfolio_id": {
+                "type": "string",
+                "enum": [
+                  "demo-balanced"
+                ]
+              }
+            },
+            "required": [
+              "portfolio_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "standard",
+      "split": "dev",
+      "prompt": "解读一下 BTC 目前的现货结构。",
+      "paired_with_main": true,
+      "expected_template": null,
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "synthetic_spot_structure_read",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Use the inline Standard format without inventing a specialized template.",
+        "Retain 64200 and -3.40%."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "synthetic_spot_structure_read",
+                  "skillDescription": "Synthetic BTC spot structure report. No specialized overview, macro, scanner, comparison or attribution shape. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "synthetic_spot_structure_read"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"summary\": \"BTC spot price is stable but volume confirmation is weak.\", \"spot_price_usd\": 64200, \"volume_change_24h_pct\": -3.4, \"window\": \"24h\", \"decision_basis\": [\"Price alone does not establish a trend.\"], \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"synthetic_spot_structure_read\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "synthetic_spot_structure_read": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "partial",
+      "split": "dev",
+      "prompt": "给我今日市场概览，并说明数据有什么缺口。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-overview.md",
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "daily_market_overview",
+      "expected_status": "partial",
+      "semantic_checks": [
+        "Put an ETF gap warning at the top of TL;DR and retain partial / low.",
+        "Do not invent ETF numbers."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "daily_market_overview",
+                  "skillDescription": "Daily crypto overview; ETF data unavailable in this fixed snapshot and cannot be filled by other registered services. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "daily_market_overview"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"decision_report\": {\"title\": \"Daily market overview\", \"conclusion\": \"The market is range-bound; liquidity is improving but participation remains narrow.\", \"market_analysis\": \"## Liquidity\\n- Stablecoin supply increased 1.20% over 7d.\\n\\n## Market structure\\n- BTC dominance is 58.30%; BTC changed 0.80% over 24h.\"}, \"watchlist\": [{\"symbol\": \"BTC\", \"reason\": \"Watch whether market participation broadens.\"}], \"risk_flags\": [\"NARROW_PARTICIPATION\"], \"missing_or_stale_inputs\": [\"ETF flows\"], \"action_guidance\": {\"bias\": \"context_only\", \"reference_action\": \"Monitor liquidity and participation before strengthening the judgment.\"}, \"signal_board\": [{\"internal\": \"INTERNAL_CANARY_71\"}], \"coverage_diagnostics\": {\"internal\": \"INTERNAL_CANARY_71\"}, \"status\": \"partial\", \"confidence\": \"low\", \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"daily_market_overview\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "daily_market_overview": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "blocked",
+      "split": "dev",
+      "prompt": "用 CMC Hub 给我今日加密市场概览。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-overview.md",
+      "kind": "blocked",
+      "unreadable_template": false,
+      "service": "daily_market_overview",
+      "expected_status": "blocked",
+      "semantic_checks": [
+        "Lead with the entitlement block reason.",
+        "No Details or divider, and no invented fallback/data; retain footer."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "daily_market_overview",
+                  "skillDescription": "Daily market overview; the returned business status may be blocked by unavailable entitlement. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "daily_market_overview"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"status\": \"blocked\", \"confidence\": \"low\", \"conclusion\": \"The snapshot is unavailable because the market-data entitlement is missing.\", \"error_code\": \"ENTITLEMENT_REQUIRED\", \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"daily_market_overview\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "daily_market_overview": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "unreadable",
+      "split": "dev",
+      "prompt": "给我今日加密市场概览。",
+      "paired_with_main": true,
+      "expected_template": "reference/template-overview.md",
+      "kind": "report",
+      "unreadable_template": true,
+      "service": "daily_market_overview",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Attempt the matching template, then use the inline Standard fallback when reading fails.",
+        "Keep source values and status without exposing tool traces or fabricating an alternate file."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "daily_market_overview",
+                  "skillDescription": "Daily market overview of liquidity and market structure. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "daily_market_overview"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"decision_report\": {\"title\": \"Daily market overview\", \"conclusion\": \"The market is range-bound; liquidity is improving but participation remains narrow.\", \"market_analysis\": \"## Liquidity\\n- Stablecoin supply increased 1.20% over 7d.\\n\\n## Market structure\\n- BTC dominance is 58.30%; BTC changed 0.80% over 24h.\"}, \"watchlist\": [{\"symbol\": \"BTC\", \"reason\": \"Watch whether market participation broadens.\"}], \"risk_flags\": [\"NARROW_PARTICIPATION\"], \"missing_or_stale_inputs\": [], \"action_guidance\": {\"bias\": \"context_only\", \"reference_action\": \"Monitor liquidity and participation before strengthening the judgment.\"}, \"signal_board\": [{\"internal\": \"INTERNAL_CANARY_71\"}], \"coverage_diagnostics\": {\"internal\": \"INTERNAL_CANARY_71\"}, \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"daily_market_overview\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "daily_market_overview": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        },
+        "unreadable_files": [
+          "reference/template-overview.md"
+        ]
+      }
+    },
+    {
+      "id": "standalone_equity",
+      "split": "dev",
+      "prompt": "研究 NVDA 的估值和基本面，给我主要判断及风险。",
+      "paired_with_main": false,
+      "expected_template": null,
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "us_equity_research_dossier",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Use Standard format; do not load template-equity-context.md.",
+        "Do not add a Crypto signal block or infer BTC linkage; preserve the completed-session date."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "us_equity_research_dossier",
+                  "skillDescription": "Standalone U.S.-listed NVDA company research: valuation, fundamentals and risks, no BTC or crypto evidence. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                      "symbol": {
+                        "type": "string",
+                        "enum": [
+                          "NVDA"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "symbol"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "us_equity_research_dossier"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"symbol\": \"NVDA\", \"listing\": \"NASDAQ:NVDA\", \"currency\": \"USD\", \"session_date\": \"2026-09-25\", \"data_phase\": \"completed_session\", \"summary\": \"Strong growth is accompanied by a demanding valuation.\", \"trailing_pe\": 42.3, \"revenue_growth_yoy_pct\": 18.2, \"risks\": [\"Revenue concentration and valuation sensitivity.\"], \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"us_equity_research_dossier\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "us_equity_research_dossier": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "enum": [
+                  "NVDA"
+                ]
+              }
+            },
+            "required": [
+              "symbol"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "standalone_crypto_company",
+      "split": "dev",
+      "prompt": "研究 COIN 的基本面和估值，给我主要判断及风险。",
+      "paired_with_main": false,
+      "expected_template": null,
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "us_equity_research_dossier",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Use Standard format; a crypto-linked company name alone must not select template-equity-context.md.",
+        "Do not add Crypto signal or invent BTC beta."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "us_equity_research_dossier",
+                  "skillDescription": "Standalone U.S.-listed COIN company fundamentals and valuation; no BTC sensitivity or crypto benchmark data. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                      "symbol": {
+                        "type": "string",
+                        "enum": [
+                          "COIN"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "symbol"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "us_equity_research_dossier"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"symbol\": \"COIN\", \"listing\": \"NASDAQ:COIN\", \"currency\": \"USD\", \"session_date\": \"2026-09-25\", \"data_phase\": \"completed_session\", \"summary\": \"Valuation is sensitive to the durability of company revenue.\", \"trailing_pe\": 31.2, \"revenue_growth_yoy_pct\": 12.4, \"risks\": [\"Revenue concentration and regulatory uncertainty.\"], \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"us_equity_research_dossier\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "us_equity_research_dossier": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "enum": [
+                  "COIN"
+                ]
+              }
+            },
+            "required": [
+              "symbol"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "crypto_equity",
+      "split": "dev",
+      "prompt": "比较 COIN 与 MSTR 过去 60 个美股交易日对 BTC 的敏感度，能否把它们当作同等的 BTC 敞口？",
+      "paired_with_main": false,
+      "expected_template": "reference/template-equity-context.md",
+      "kind": "report",
+      "unreadable_template": false,
+      "service": "assess_crypto_proxy_equity_beta",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Use the crypto-equity template for the explicitly requested connection.",
+        "Preserve 60 sessions, 1.30 / 1.90 beta and historical-not-predictive limitation."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "assess_crypto_proxy_equity_beta",
+                  "skillDescription": "Compare BTC sensitivity for COIN and MSTR over 60 aligned completed equity sessions; includes benchmark and each equity beta, no need for another price service. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                      "symbols": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "COIN",
+                            "MSTR"
+                          ]
+                        },
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "uniqueItems": true
+                      }
+                    },
+                    "required": [
+                      "symbols"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "assess_crypto_proxy_equity_beta"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"summary\": \"The two equities have different historical BTC sensitivity and substantial company-specific risk.\", \"benchmark\": \"BTC\", \"sample_sessions\": 60, \"sample_end\": \"2026-09-25\", \"aligned_crypto_return_pct\": 5.2, \"equities\": [{\"symbol\": \"COIN\", \"beta\": 1.3, \"residual_risk\": \"Company earnings and regulation.\"}, {\"symbol\": \"MSTR\", \"beta\": 1.9, \"residual_risk\": \"Financing and balance-sheet effects.\"}], \"conclusion\": \"They are not equivalent BTC exposures; historical beta is not a forecast.\", \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"assess_crypto_proxy_equity_beta\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "assess_crypto_proxy_equity_beta": {
+            "type": "object",
+            "properties": {
+              "symbols": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "COIN",
+                    "MSTR"
+                  ]
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "symbols"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "explicit_csv",
+      "split": "dev",
+      "prompt": "查询 BTC 当前价格，只输出 CSV，列为 symbol,price_usd,timestamp,status,confidence，不要解释。",
+      "paired_with_main": false,
+      "expected_template": null,
+      "kind": "csv",
+      "unreadable_template": false,
+      "service": "synthetic_btc_quote",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "Return the requested CSV without TL;DR, Details or a decorative footer.",
+        "Retain source observation time, price, status and confidence."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "synthetic_btc_quote",
+                  "skillDescription": "Synthetic single BTC quote at the supplied observation time, with price_usd and footer metadata. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "synthetic_btc_quote"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"symbol\": \"BTC\", \"price_usd\": 64200, \"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"synthetic_btc_quote\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "synthetic_btc_quote": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "id": "concept",
+      "split": "dev",
+      "prompt": "资金费率是什么？不用查询行情，用两句话解释。",
+      "paired_with_main": false,
+      "expected_template": null,
+      "kind": "concept",
+      "unreadable_template": false,
+      "service": "synthetic_unused_service",
+      "expected_status": "ok",
+      "semantic_checks": [
+        "No market-data calls or report template reads.",
+        "Answer the concept in Chinese and honor the two-sentence request."
+      ],
+      "fixture": {
+        "label": "synthetic_report_contract",
+        "clock": "2026-09-28T00:00:00Z",
+        "provenance": "Hand-authored synthetic fixture; no claim about live prices, service availability, or backend coverage.",
+        "tools": [
+          {
+            "name": "find_skill",
+            "description": "Find CMC Skill Hub services and inspect their inputSchema. This test registry supplies synthetic fixed-time evidence, not live market data.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "top_k": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 20
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "execute_skill",
+            "description": "Execute a discovered read-only CMC Skill Hub service using a JSON object of parameters. All results in this test are synthetic.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "unique_name": {
+                  "type": "string"
+                },
+                "parameters": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "unique_name",
+                "parameters"
+              ],
+              "additionalProperties": false
+            }
+          }
+        ],
+        "routes": [
+          {
+            "tool": "find_skill",
+            "match": {},
+            "response": {
+              "candidates": [
+                {
+                  "uniqueName": "synthetic_unused_service",
+                  "skillDescription": "Unused service for a concept-only test. Fixed synthetic snapshot for this test only.",
+                  "resultType": "evidence_pack",
+                  "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "tool": "execute_skill",
+            "match": {
+              "unique_name": "synthetic_unused_service"
+            },
+            "response": {
+              "raw_output": "{\"result\": {\"ok\": true, \"exitCode\": 0, \"data\": {\"timestamp\": \"2026-09-28T00:00:00Z\", \"skill_id\": \"synthetic_unused_service\", \"status\": \"ok\", \"confidence\": \"medium\"}}}"
+            }
+          }
+        ],
+        "service_schemas": {
+          "synthetic_unused_service": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ]
+}

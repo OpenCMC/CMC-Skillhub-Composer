@@ -1,15 +1,21 @@
 # CMC Skillhub Composer
 
-This repository contains the agent-facing skill for using CMC Crypto Skill Hub through MCP.
+This repository contains the agent-facing Composer skill for CMC Skill Hub, covering crypto, derivatives, onchain assets, U.S. equities, and cross-asset research.
 
 The skill teaches an agent how to:
 
 - discover CMC Crypto Skill Hub capabilities with `find_skill`;
+- match Hub services to the requested fields, asset identity, granularity, and time window;
 - validate parameters against each returned `input_schema`;
 - execute selected capabilities with `execute_skill`;
 - parse wrapped `raw_output` responses;
 - handle blocked, partial, stale, and failed tool results;
-- render concise Markdown research summaries for crypto market questions, in the user's own language.
+- verify asset identity, units, time windows, provenance, and evidence coverage;
+- render research summaries with the original template router and Markdown format, in the user's language; honor explicitly requested alternative formats.
+
+Connect the CMC Skill Hub MCP server separately. Composer discovers and executes Hub services through `find_skill` and `execute_skill`, including services backed by FastAPI or SQL; it does not automatically select separate data providers or invent backend queries. Missing Hub coverage is reported explicitly; external sources require an explicit user request. Domain references are loaded only when service contracts need clarification. The original Output Template Router, Standard Report Format, language rules and output self-check remain directly in `SKILL.md`. Successful Hub results use that router by default, including short daily overviews and macro reads. The five original report template files are unchanged. Standalone equity research uses the Standard Report Format (or an existing matching template); the equity-context template applies only when the user asks for a crypto connection.
+
+For derivatives, the skill distinguishes market-wide snapshots from venue/instrument data and realized liquidations from heatmaps. For onchain research, it checks chain and contract identity and separates holders, transfers, exchange flows, and swaps. Native U.S. equity data is not interchangeable with tokenized-stock data.
 
 ## Repository Layout
 
@@ -19,11 +25,15 @@ The installable skill is in the `cmc-skillhub-composer/` subdirectory:
 cmc-skillhub-composer/
   SKILL.md
   reference/
+    derivatives.md
+    onchain.md
+    equities.md
     template-overview.md
     template-macro.md
     template-scanner.md
     template-comparison.md
     template-attribution.md
+    template-equity-context.md
     startup/
       README.md
       claude-code.md
@@ -33,9 +43,17 @@ cmc-skillhub-composer/
       openclaw.md
       chatgpt-web.md
       claude-web.md
+  scripts/
+    inspect_result.py
 ```
 
 The directory name matches the `name` field in `SKILL.md`.
+
+`scripts/inspect_result.py` is an optional offline Python helper for inspecting wrapped Hub JSON responses while preserving numeric lexemes and separate execution/business states. Agents can follow the response checks directly without running it; parsing does not validate financial evidence.
+
+## Compatibility validation
+
+Run `python3 tests/verify_report_compatibility.py` to check preservation against the original main. See [report regression evidence](tests/report-regression/README.md) for the fixed-data agent comparisons, final outputs, observed failures and limitations. These development tests do not establish live data coverage or a token-cost improvement.
 
 ## MCP server install docs (`reference/startup/`)
 
